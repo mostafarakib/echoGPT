@@ -7,6 +7,7 @@ import { useSidebarStore } from "@/store/useSidebarStore";
 import { engagementLinks } from "@/lib/data/nav-links";
 import { RecentChats } from "@/components/layout/RecentChats";
 import { SidebarBottomBar } from "@/components/layout/SidebarBottomBar";
+import { useSearchModalStore } from "@/store/useSearchModalStore";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
@@ -14,6 +15,8 @@ export function Sidebar() {
   useEffect(() => {
     useSidebarStore.persist.rehydrate();
   }, []);
+
+  const openSearch = useSearchModalStore((s) => s.open);
 
   return (
     <>
@@ -74,6 +77,7 @@ export function Sidebar() {
             <span className={clsx(isMini && "md:hidden")}>New chat</span>
           </button>
           <button
+            onClick={openSearch}
             className={clsx(
               "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] font-medium text-text hover:bg-border",
               isMini && "md:justify-center md:px-2",
