@@ -6,6 +6,7 @@ import { Menu, Zap, Settings, Moon, Sun, LogOut } from "lucide-react";
 import clsx from "clsx";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { useClickOutside } from "@/lib/hooks/useClickOutside";
+import { useSettingsModalStore } from "@/store/useSettingsModalStore";
 
 export function TopNavbar() {
   const openMobile = useSidebarStore((s) => s.openMobile);
@@ -17,6 +18,8 @@ export function TopNavbar() {
 
   const isDark = resolvedTheme === "dark";
   const toggleTheme = () => setTheme(isDark ? "light" : "dark");
+
+  const openSettingsModal = useSettingsModalStore((s) => s.open);
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface px-4">
@@ -50,7 +53,14 @@ export function TopNavbar() {
             <div className="my-1 h-px bg-border" />
 
             <PopoverItem icon={<Zap size={16} />} label="Upgrade" />
-            <PopoverItem icon={<Settings size={16} />} label="Settings" />
+            <PopoverItem
+              icon={<Settings size={16} />}
+              label="Settings"
+              onClick={() => {
+                openSettingsModal();
+                setPopoverOpen(false);
+              }}
+            />
 
             <button
               onClick={toggleTheme}
@@ -87,12 +97,17 @@ export function TopNavbar() {
 function PopoverItem({
   icon,
   label,
+  onClick,
 }: {
   icon: React.ReactNode;
   label: string;
+  onClick?: () => void;
 }) {
   return (
-    <button className="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-[13px] text-text hover:bg-border">
+    <button
+      onClick={onClick}
+      className="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-[13px] text-text hover:bg-border"
+    >
       <span className="text-text-secondary">{icon}</span>
       {label}
     </button>

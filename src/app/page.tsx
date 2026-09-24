@@ -1,6 +1,6 @@
-// src/app/page.tsx
 import { Sidebar } from "@/components/layout/Sidebar";
 import { TopNavbar } from "@/components/layout/TopNavbar";
+import { SettingsModal } from "@/components/layout/SettingsModal";
 
 export default function Home() {
   return (
@@ -12,6 +12,7 @@ export default function Home() {
           <p className="text-sm text-text-secondary">Layout preview</p>
         </main>
       </div>
+      <SettingsModal />
     </div>
   );
 }

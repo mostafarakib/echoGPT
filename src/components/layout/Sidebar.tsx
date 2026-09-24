@@ -5,6 +5,8 @@ import { ChevronsLeft, ChevronsRight, Plus, Search } from "lucide-react";
 import clsx from "clsx";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { engagementLinks } from "@/lib/data/nav-links";
+import { RecentChats } from "@/components/layout/RecentChats";
+import { SidebarBottomBar } from "@/components/layout/SidebarBottomBar";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
@@ -122,7 +124,10 @@ export function Sidebar() {
               );
             })}
           </div>
+          <div className="my-2.5 h-px bg-border" />
+          <RecentChats />
         </nav>
+        <SidebarBottomBar />
       </aside>
     </>
   );
