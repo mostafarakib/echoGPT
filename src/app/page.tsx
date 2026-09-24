@@ -1,12 +1,12 @@
+import { Sidebar } from "@/components/layout/Sidebar";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-canvas">
-      <div className="rounded-xl border border-border bg-surface p-6">
-        <p className="text-sm text-text-secondary">
-          <span className="text-accent font-medium">Accent color</span> should
-          be indigo-violet.
-        </p>
-      </div>
-    </main>
+    <div className="flex h-screen">
+      <Sidebar />
+      <main className="flex flex-1 items-center justify-center bg-canvas">
+        <p className="text-sm text-text-secondary">Sidebar preview — Stage 4</p>
+      </main>
+    </div>
   );
 }
