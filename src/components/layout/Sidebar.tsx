@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
-import { ChevronsLeft, ChevronsRight, Plus, Search } from "lucide-react";
+import { PanelLeft, Plus, Search } from "lucide-react";
 import clsx from "clsx";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { engagementLinks } from "@/lib/data/nav-links";
 import { RecentChats } from "@/components/layout/RecentChats";
 import { SidebarBottomBar } from "@/components/layout/SidebarBottomBar";
 import { useSearchModalStore } from "@/store/useSearchModalStore";
+import { useChatStore } from "@/store/useChatStore";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
+  const newChat = useChatStore((s) => s.newChat);
 
   useEffect(() => {
     useSidebarStore.persist.rehydrate();
@@ -44,9 +46,11 @@ export function Sidebar() {
           )}
         >
           <div className="flex min-w-0 items-center gap-2.5 overflow-hidden">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">
-              E
-            </div>
+            {(isMobileOpen || !isMini) && (
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">
+                E
+              </div>
+            )}
             <span
               className={clsx(
                 "truncate text-[15px] font-semibold",
@@ -61,13 +65,17 @@ export function Sidebar() {
             title={isMini ? "Expand sidebar" : "Collapse sidebar"}
             className="hidden h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-secondary hover:bg-border hover:text-text md:flex"
           >
-            {isMini ? <ChevronsRight size={16} /> : <ChevronsLeft size={16} />}
+            <PanelLeft size={16} />
           </button>
         </div>
 
         {/* New chat + Search */}
         <div className="flex flex-col gap-1 px-2.5">
           <button
+            onClick={() => {
+              newChat();
+              closeMobile();
+            }}
             className={clsx(
               "flex items-center gap-2.5 rounded-lg bg-accent-soft px-2.5 py-2 text-[13.5px] font-semibold text-accent hover:brightness-95",
               isMini && "md:justify-center md:px-2",

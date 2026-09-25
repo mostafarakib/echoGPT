@@ -1,37 +1,23 @@
 "use client";
 
-import { Sidebar } from "@/components/layout/Sidebar";
-import { TopNavbar } from "@/components/layout/TopNavbar";
-import { SettingsModal } from "@/components/layout/SettingsModal";
-import { useSearchModalStore } from "@/store/useSearchModalStore";
-import { SearchModal } from "@/components/layout/SearchModal";
-import { useEffect } from "react";
+import { useChatStore } from "@/store/useChatStore";
+import { ChatEmptyState } from "@/components/chat/ChatEmptyState";
+import { MessageList } from "@/components/chat/MessageList";
+import { ChatComposer } from "@/components/chat/ChatComposer";
+import { ConnectorsModal } from "@/components/chat/ConnectorsModal";
+import { PricingModal } from "@/components/chat/PricingModal";
 
 export default function Home() {
-  const openSearch = useSearchModalStore((s) => s.open);
-
-  useEffect(() => {
-    function handleKeydown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        openSearch();
-      }
-    }
-    document.addEventListener("keydown", handleKeydown);
-    return () => document.removeEventListener("keydown", handleKeydown);
-  }, [openSearch]);
+  const hasMessages = useChatStore((s) => s.messages.length > 0);
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <TopNavbar />
-        <main className="flex flex-1 items-center justify-center bg-canvas">
-          <p className="text-sm text-text-secondary">Layout preview</p>
-        </main>
+    <div className="flex h-full flex-col">
+      <div className="flex-1 overflow-y-auto">
+        {hasMessages ? <MessageList /> : <ChatEmptyState />}
       </div>
-      <SettingsModal />
-      <SearchModal />
+      <ChatComposer />
+      <ConnectorsModal />
+      <PricingModal />
     </div>
   );
 }

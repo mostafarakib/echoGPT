@@ -7,12 +7,14 @@ import clsx from "clsx";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { useClickOutside } from "@/lib/hooks/useClickOutside";
 import { useSettingsModalStore } from "@/store/useSettingsModalStore";
+import { useChatStore } from "@/store/useChatStore";
 
 export function TopNavbar() {
   const openMobile = useSidebarStore((s) => s.openMobile);
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
+  const chatTitle = useChatStore((s) => s.title);
 
   useClickOutside(popoverRef, () => setPopoverOpen(false));
 
@@ -31,7 +33,9 @@ export function TopNavbar() {
         <Menu size={19} />
       </button>
 
-      <span className="text-sm font-semibold text-text-secondary">Chat</span>
+      <span className="truncate text-sm font-semibold text-text-secondary">
+        {chatTitle ?? ""}
+      </span>
 
       <div ref={popoverRef} className="relative ml-auto">
         <button
