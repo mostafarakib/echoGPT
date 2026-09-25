@@ -2,12 +2,13 @@
 
 import { useRef, useState } from "react";
 import { useTheme } from "next-themes";
-import { Menu, Zap, Settings, Moon, Sun, LogOut } from "lucide-react";
+import { Menu, Settings, Moon, Sun, LogOut, Crown } from "lucide-react";
 import clsx from "clsx";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import { useClickOutside } from "@/lib/hooks/useClickOutside";
 import { useSettingsModalStore } from "@/store/useSettingsModalStore";
 import { useChatStore } from "@/store/useChatStore";
+import { usePricingModalStore } from "@/store/usePricingModalStore";
 
 export function TopNavbar() {
   const openMobile = useSidebarStore((s) => s.openMobile);
@@ -22,6 +23,7 @@ export function TopNavbar() {
   const toggleTheme = () => setTheme(isDark ? "light" : "dark");
 
   const openSettingsModal = useSettingsModalStore((s) => s.open);
+  const openPricingModal = usePricingModalStore((s) => s.open);
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface px-4">
@@ -56,7 +58,14 @@ export function TopNavbar() {
             </div>
             <div className="my-1 h-px bg-border" />
 
-            <PopoverItem icon={<Zap size={16} />} label="Upgrade" />
+            <PopoverItem
+              icon={<Crown size={16} />}
+              label="Upgrade"
+              onClick={() => {
+                openPricingModal();
+                setPopoverOpen(false);
+              }}
+            />
             <PopoverItem
               icon={<Settings size={16} />}
               label="Settings"

@@ -9,6 +9,7 @@ import { RecentChats } from "@/components/layout/RecentChats";
 import { SidebarBottomBar } from "@/components/layout/SidebarBottomBar";
 import { useSearchModalStore } from "@/store/useSearchModalStore";
 import { useChatStore } from "@/store/useChatStore";
+import { SidebarUpgradeCard } from "@/components/layout/SidebarUpgradeCard";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
@@ -139,6 +140,8 @@ export function Sidebar() {
           <div className="my-2.5 h-px bg-border" />
           <RecentChats />
         </nav>
+
+        <SidebarUpgradeCard />
         <SidebarBottomBar />
       </aside>
     </>
