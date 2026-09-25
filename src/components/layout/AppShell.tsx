@@ -6,6 +6,8 @@ import { TopNavbar } from "@/components/layout/TopNavbar";
 import { SettingsModal } from "@/components/layout/SettingsModal";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { useSearchModalStore } from "@/store/useSearchModalStore";
+import { ConnectorsModal } from "../chat/ConnectorsModal";
+import { PricingModal } from "../shared/PricingModal";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const openSearch = useSearchModalStore((s) => s.open);
@@ -30,6 +32,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
       <SettingsModal />
       <SearchModal />
+      <ConnectorsModal />
+      <PricingModal />
     </div>
   );
 }

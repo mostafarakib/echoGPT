@@ -4,8 +4,6 @@ import { useChatStore } from "@/store/useChatStore";
 import { ChatEmptyState } from "@/components/chat/ChatEmptyState";
 import { MessageList } from "@/components/chat/MessageList";
 import { ChatComposer } from "@/components/chat/ChatComposer";
-import { ConnectorsModal } from "@/components/chat/ConnectorsModal";
-import { PricingModal } from "@/components/chat/PricingModal";
 
 export default function Home() {
   const hasMessages = useChatStore((s) => s.messages.length > 0);
@@ -16,8 +14,6 @@ export default function Home() {
         {hasMessages ? <MessageList /> : <ChatEmptyState />}
       </div>
       <ChatComposer />
-      <ConnectorsModal />
-      <PricingModal />
     </div>
   );
 }

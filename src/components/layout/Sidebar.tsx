@@ -10,16 +10,22 @@ import { SidebarBottomBar } from "@/components/layout/SidebarBottomBar";
 import { useSearchModalStore } from "@/store/useSearchModalStore";
 import { useChatStore } from "@/store/useChatStore";
 import { SidebarUpgradeCard } from "@/components/layout/SidebarUpgradeCard";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
   const newChat = useChatStore((s) => s.newChat);
+  const router = useRouter();
 
   useEffect(() => {
     useSidebarStore.persist.rehydrate();
   }, []);
 
   const openSearch = useSearchModalStore((s) => s.open);
+
+  const pathname = usePathname();
 
   return (
     <>
@@ -76,9 +82,10 @@ export function Sidebar() {
             onClick={() => {
               newChat();
               closeMobile();
+              router.push("/");
             }}
             className={clsx(
-              "flex items-center gap-2.5 rounded-lg bg-accent-soft px-2.5 py-2 text-[13.5px] font-semibold text-accent hover:brightness-95",
+              "flex items-center gap-2.5 rounded-lg bg-accent px-2.5 py-2 text-[13.5px] font-semibold text-white hover:brightness-95",
               isMini && "md:justify-center md:px-2",
             )}
           >
@@ -110,15 +117,15 @@ export function Sidebar() {
           <div className="flex flex-col gap-0.5">
             {engagementLinks.map((link) => {
               const Icon = link.icon;
-              return (
-                <button
-                  key={link.id}
-                  title={link.label}
-                  className={clsx(
-                    "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] text-text-secondary hover:bg-border hover:text-text",
-                    isMini && "md:justify-center md:px-2",
-                  )}
-                >
+              const isActive = link.href ? pathname === link.href : false;
+              const className = clsx(
+                "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] hover:bg-border hover:text-text",
+                isMini && "md:justify-center md:px-2",
+                isActive ? "bg-accent-soft text-accent" : "text-text-secondary",
+              );
+
+              const content = (
+                <>
                   <Icon size={17} className="shrink-0" />
                   <span
                     className={clsx(
@@ -133,6 +140,20 @@ export function Sidebar() {
                       </span>
                     )}
                   </span>
+                </>
+              );
+              return link.href ? (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  title={link.label}
+                  className={className}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <button key={link.id} title={link.label} className={className}>
+                  {content}
                 </button>
               );
             })}
