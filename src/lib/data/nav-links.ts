@@ -35,7 +35,7 @@ export const engagementLinks: NavLink[] = [
     href: "/video-studio",
   },
   { id: "compare", label: "Compare", icon: Columns2, href: "/compare" },
-  { id: "connectors", label: "Connectors", icon: Plug },
+  { id: "connectors", label: "Connectors", icon: Plug, href: "/connectors" },
   { id: "history", label: "History", icon: History },
   { id: "store", label: "Store", icon: ShoppingBag },
   { id: "ai-tasks", label: "AI Tasks", icon: ListChecks },
