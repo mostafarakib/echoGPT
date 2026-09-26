@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
 import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
 import { StudioModelDropdown } from "@/components/studio/StudioModelDropdown";
 import { videoModels } from "@/lib/data/video-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
+import { StudioAttachmentButton } from "@/components/studio/StudioAttachmentButton";
+import {
+  StudioAttachmentList,
+  type StudioAttachment,
+} from "@/components/studio/StudioAttachmentList";
 
 const ASPECT_RATIOS = ["16:9", "9:16", "1:1"] as const;
 
@@ -15,6 +19,19 @@ export default function VideoStudioPage() {
     useState<(typeof ASPECT_RATIOS)[number]>("16:9");
   const [modelId, setModelId] = useState(videoModels[0].id);
   const openPricing = usePricingModalStore((s) => s.open);
+  const [attachments, setAttachments] = useState<StudioAttachment[]>([]);
+
+  function handleFilesSelected(files: File[]) {
+    const newAttachments = files.map((file) => ({
+      id: crypto.randomUUID(),
+      file,
+    }));
+    setAttachments((prev) => [...prev, ...newAttachments]);
+  }
+
+  function handleRemoveAttachment(id: string) {
+    setAttachments((prev) => prev.filter((a) => a.id !== id));
+  }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
@@ -34,9 +51,14 @@ export default function VideoStudioPage() {
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <button className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-text-secondary hover:bg-border">
-              <Plus size={16} />
-            </button>
+            <StudioAttachmentButton
+              onFilesSelected={handleFilesSelected}
+              accept="image/*,video/*"
+            />
+            <StudioAttachmentList
+              attachments={attachments}
+              onRemove={handleRemoveAttachment}
+            />
             <StudioToggleGroup
               options={[...ASPECT_RATIOS]}
               value={aspectRatio}
