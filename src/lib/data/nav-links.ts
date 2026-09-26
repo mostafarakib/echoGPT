@@ -36,7 +36,7 @@ export const engagementLinks: NavLink[] = [
   },
   { id: "compare", label: "Compare", icon: Columns2, href: "/compare" },
   { id: "connectors", label: "Connectors", icon: Plug, href: "/connectors" },
-  { id: "history", label: "History", icon: History },
+  { id: "history", label: "History", icon: History, href: "/history" },
   { id: "store", label: "Store", icon: ShoppingBag },
   { id: "ai-tasks", label: "AI Tasks", icon: ListChecks },
   { id: "ai-job-analysis", label: "AI Job Analysis", icon: Briefcase },
