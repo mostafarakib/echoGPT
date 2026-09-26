@@ -34,7 +34,7 @@ export const engagementLinks: NavLink[] = [
     pro: true,
     href: "/video-studio",
   },
-  { id: "compare", label: "Compare", icon: Columns2 },
+  { id: "compare", label: "Compare", icon: Columns2, href: "/compare" },
   { id: "connectors", label: "Connectors", icon: Plug },
   { id: "history", label: "History", icon: History },
   { id: "store", label: "Store", icon: ShoppingBag },
