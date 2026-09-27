@@ -8,6 +8,7 @@ import { SearchModal } from "@/components/layout/SearchModal";
 import { useSearchModalStore } from "@/store/useSearchModalStore";
 import { ConnectorsModal } from "../chat/ConnectorsModal";
 import { PricingModal } from "../shared/PricingModal";
+import { UpgradeModal } from "../shared/UpgradeModal";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const openSearch = useSearchModalStore((s) => s.open);
@@ -34,6 +35,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <SearchModal />
       <ConnectorsModal />
       <PricingModal />
+      <UpgradeModal />
     </div>
   );
 }
