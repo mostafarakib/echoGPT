@@ -12,7 +12,7 @@ export function LandingFaq() {
   return (
     <section id="faq" className="scroll-mt-16 bg-canvas px-4 py-20 sm:px-6">
       <div className="mx-auto max-w-2xl">
-        <SectionHeading eyebrow="FAQ" title="Questions, answered" />
+        <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
         <div className="mt-8 flex flex-col">
           {faqItems.map((item) => {
             const isOpen = openId === item.id;

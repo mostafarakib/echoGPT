@@ -20,7 +20,7 @@ export const landingFeatures: LandingFeature[] = [
     id: "multi-model-chat",
     title: "Multi-model chat",
     description:
-      "Switch between leading AI models — including GPT, Claude, and Gemini — without leaving your conversation.",
+      "Switch between leading AI models including GPT, Claude, Gemini and more without leaving your conversation.",
     icon: MessageSquare,
   },
   {
@@ -55,7 +55,7 @@ export const landingFeatures: LandingFeature[] = [
     id: "ai-tasks",
     title: "Ready-made AI Tasks",
     description:
-      "Dozens of pre-built prompts for ideas, work, content creation, and more — no prompt engineering required.",
+      "Dozens of pre-built prompts for ideas, work, content creation, and more - no extreme prompt engineering required.",
     icon: Zap,
   },
 ];
@@ -99,7 +99,7 @@ export interface PricingPlan {
   price: string;
   period: string;
   features: string[];
-  highlighted: boolean;
+  popular: boolean;
   ctaLabel: string;
 }
 
@@ -110,7 +110,7 @@ export const landingPricingPlans: PricingPlan[] = [
     price: "$0",
     period: "forever",
     features: ["5 messages / 5 hrs", "Core model access", "1 connector"],
-    highlighted: false,
+    popular: false,
     ctaLabel: "Get started",
   },
   {
@@ -124,7 +124,7 @@ export const landingPricingPlans: PricingPlan[] = [
       "Unlimited connectors",
       "Image & Video Studio",
     ],
-    highlighted: true,
+    popular: true,
     ctaLabel: "Upgrade to Pro",
   },
   {
@@ -133,7 +133,7 @@ export const landingPricingPlans: PricingPlan[] = [
     price: "$29",
     period: "per month",
     features: ["Everything in Pro", "Shared workspaces", "Priority support"],
-    highlighted: false,
+    popular: false,
     ctaLabel: "Contact us",
   },
 ];
@@ -151,25 +151,25 @@ export const testimonials: Testimonial[] = [
     id: "1",
     quote:
       "I stopped paying for three separate AI subscriptions the week I switched. Compare mode alone is worth it.",
-    name: "Jordan M.",
+    name: "Tarique Rahman",
     role: "Product Designer",
-    initials: "JM",
+    initials: "TR",
   },
   {
     id: "2",
     quote:
       "The job analysis tool caught things in a posting I would've missed. Genuinely useful, not a gimmick.",
-    name: "Sara R.",
+    name: "Sheikh Hasina",
     role: "Career Coach",
-    initials: "SR",
+    initials: "SH",
   },
   {
     id: "3",
     quote:
       "Built my SOP for grad school applications in an afternoon instead of a week. The country-specific guidance was the key part.",
-    name: "Tariq A.",
+    name: "Nahid Islam",
     role: "Graduate Applicant",
-    initials: "TA",
+    initials: "NI",
   },
 ];
 
