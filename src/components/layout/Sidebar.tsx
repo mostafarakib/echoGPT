@@ -118,14 +118,26 @@ export function Sidebar() {
             {engagementLinks.map((link) => {
               const Icon = link.icon;
               const isActive = link.href ? pathname === link.href : false;
-              const className = clsx(
-                "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] hover:bg-border hover:text-text",
-                isMini && "md:justify-center md:px-2",
-                isActive ? "bg-accent-soft text-accent" : "text-text-secondary",
-              );
 
-              const content = (
-                <>
+              return (
+                <Link
+                  key={link.id}
+                  href={link.href ?? "#"}
+                  title={link.label}
+                  onClick={(e) => {
+                    if (!link.href) e.preventDefault();
+                  }}
+                  aria-disabled={!link.href}
+                  className={clsx(
+                    "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13.5px] hover:bg-border hover:text-text",
+                    isMini && "md:justify-center md:px-2",
+                    isActive
+                      ? "bg-accent-soft text-accent"
+                      : "text-text-secondary",
+                    !link.href &&
+                      "cursor-default opacity-60 hover:bg-transparent hover:text-text-secondary",
+                  )}
+                >
                   <Icon size={17} className="shrink-0" />
                   <span
                     className={clsx(
@@ -140,21 +152,7 @@ export function Sidebar() {
                       </span>
                     )}
                   </span>
-                </>
-              );
-              return link.href ? (
-                <Link
-                  key={link.id}
-                  href={link.href}
-                  title={link.label}
-                  className={className}
-                >
-                  {content}
                 </Link>
-              ) : (
-                <button key={link.id} title={link.label} className={className}>
-                  {content}
-                </button>
               );
             })}
           </div>

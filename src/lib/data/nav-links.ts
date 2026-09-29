@@ -45,5 +45,10 @@ export const engagementLinks: NavLink[] = [
     icon: Briefcase,
     href: "/ai-job-analysis",
   },
-  { id: "ai-sop-builder", label: "AI SOP Builder", icon: FileText },
+  {
+    id: "ai-sop-builder",
+    label: "AI SOP Builder",
+    icon: FileText,
+    href: "/ai-sop-builder",
+  },
 ];
