@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
-import { StudioModelDropdown } from "@/components/studio/StudioModelDropdown";
 import { imageModels } from "@/lib/data/image-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
 import { AttachmentButton } from "@/components/ui/AttachmentButton";
@@ -10,6 +9,7 @@ import {
   AttachmentList,
   type Attachment,
 } from "@/components/ui/AttachmentList";
+import { ModelSelectionDropdown } from "@/components/ui/ModelSelectionDropdown";
 
 const ASPECT_RATIOS = ["1:1", "3:2", "2:3", "auto"] as const;
 const COUNTS = [1, 2, 3, 4] as const;
@@ -71,7 +71,7 @@ export default function ImageStudioPage() {
             value={count}
             onChange={setCount}
           />
-          <StudioModelDropdown
+          <ModelSelectionDropdown
             models={imageModels}
             selectedId={modelId}
             onChange={setModelId}

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
-import { StudioModelDropdown } from "@/components/studio/StudioModelDropdown";
 import { videoModels } from "@/lib/data/video-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
 import { AttachmentButton } from "@/components/ui/AttachmentButton";
@@ -10,6 +9,7 @@ import {
   AttachmentList,
   type Attachment,
 } from "@/components/ui/AttachmentList";
+import { ModelSelectionDropdown } from "@/components/ui/ModelSelectionDropdown";
 
 const ASPECT_RATIOS = ["16:9", "9:16", "1:1"] as const;
 
@@ -64,7 +64,7 @@ export default function VideoStudioPage() {
               value={aspectRatio}
               onChange={setAspectRatio}
             />
-            <StudioModelDropdown
+            <ModelSelectionDropdown
               models={videoModels}
               selectedId={modelId}
               onChange={setModelId}

@@ -14,6 +14,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { EchoLogo } from "../ui/EchoLogo";
+import { useSettingsStore } from "@/store/useSettingsStore";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
@@ -27,6 +28,9 @@ export function Sidebar() {
   const openSearch = useSearchModalStore((s) => s.open);
 
   const pathname = usePathname();
+
+  const defaultModelId = useSettingsStore((s) => s.defaultModelId);
+  const setModel = useChatStore((s) => s.setModel);
 
   return (
     <>
@@ -83,6 +87,7 @@ export function Sidebar() {
           <button
             onClick={() => {
               newChat();
+              setModel(defaultModelId);
               closeMobile();
               router.push("/chat");
             }}

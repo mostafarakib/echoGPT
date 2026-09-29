@@ -50,7 +50,7 @@ export function Modal({
       >
         <div
           className={clsx(
-            "relative w-full rounded-xl border border-border bg-surface shadow-[0_12px_32px_rgba(20,20,30,0.12),0_2px_8px_rgba(20,20,30,0.06)]",
+            "relative w-full overflow-hidden rounded-xl border border-border bg-surface shadow-[0_12px_32px_rgba(20,20,30,0.12),0_2px_8px_rgba(20,20,30,0.06)]",
             maxWidthClassName,
           )}
         >

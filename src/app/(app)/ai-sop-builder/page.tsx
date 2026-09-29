@@ -12,6 +12,7 @@ import {
 import { sopTemplates } from "@/lib/data/sop-templates";
 import { SopTemplateCard } from "@/components/sop/SopTemplateCard";
 import { useSopStore } from "@/store/useSopStore";
+import { HoverLift } from "@/components/ui/HoverLift";
 
 const heroStats = [
   {
@@ -58,7 +59,7 @@ export default function AiSopBuilderPage() {
           {heroStats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div
+              <HoverLift
                 key={stat.title}
                 className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-surface px-4 py-6 shadow-[0_4px_16px_rgba(20,20,30,0.06)]"
               >
@@ -69,7 +70,7 @@ export default function AiSopBuilderPage() {
                 <p className="text-[12px] leading-relaxed text-text-secondary">
                   {stat.subtitle}
                 </p>
-              </div>
+              </HoverLift>
             );
           })}
         </div>

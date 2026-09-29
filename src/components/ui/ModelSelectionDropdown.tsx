@@ -11,17 +11,19 @@ interface Model {
   provider: string;
 }
 
-interface StudioModelDropdownProps {
+interface ModelDropdownProps {
   models: Model[];
   selectedId: string;
   onChange: (id: string) => void;
+  align?: "left" | "right";
 }
 
-export function StudioModelDropdown({
+export function ModelSelectionDropdown({
   models,
   selectedId,
   onChange,
-}: StudioModelDropdownProps) {
+  align = "left",
+}: ModelDropdownProps) {
   const [isOpen, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, () => setOpen(false));
@@ -39,7 +41,12 @@ export function StudioModelDropdown({
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-[calc(100%+6px)] z-30 w-56 rounded-xl border border-border bg-surface p-1.5 shadow-[0_12px_32px_rgba(20,20,30,0.12),0_2px_8px_rgba(20,20,30,0.06)]">
+        <div
+          className={clsx(
+            "absolute top-[calc(100%+6px)] z-30 w-56 rounded-xl border border-border bg-surface p-1.5 shadow-[0_12px_32px_rgba(20,20,30,0.12),0_2px_8px_rgba(20,20,30,0.06)]",
+            align === "right" ? "right-0" : "left-0",
+          )}
+        >
           {models.map((model) => (
             <button
               key={model.id}

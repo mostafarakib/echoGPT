@@ -1,6 +1,7 @@
 "use client";
 
 import type { AiModel } from "@/lib/data/models";
+import { HoverLift } from "../ui/HoverLift";
 
 interface StoreModelCardProps {
   model: AiModel;
@@ -11,7 +12,7 @@ export function StoreModelCard({ model, onTry }: StoreModelCardProps) {
   const Icon = model.icon;
 
   return (
-    <div className="flex flex-col rounded-2xl border border-border bg-surface p-4">
+    <HoverLift className="flex flex-col rounded-2xl border border-border bg-surface p-4">
       <div className="flex items-center gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
           <Icon size={19} />
@@ -36,6 +37,6 @@ export function StoreModelCard({ model, onTry }: StoreModelCardProps) {
       >
         Try app
       </button>
-    </div>
+    </HoverLift>
   );
 }
