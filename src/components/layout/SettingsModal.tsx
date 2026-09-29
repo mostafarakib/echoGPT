@@ -1,22 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useTheme } from "next-themes";
-import {
-  Sliders,
-  Sun,
-  User,
-  CreditCard,
-  Monitor,
-  Moon,
-  Check,
-} from "lucide-react";
+import { Sliders, Sun, User, CreditCard } from "lucide-react";
 import clsx from "clsx";
 import { Modal } from "@/components/ui/Modal";
 import { ModelSelectionDropdown } from "../ui/ModelSelectionDropdown";
 import { useSettingsModalStore } from "@/store/useSettingsModalStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { aiModels } from "@/lib/data/models";
+import { ThemeSelector } from "@/components/ui/ThemeSelector";
 
 const tabs = [
   { id: "general", label: "General", icon: Sliders },
@@ -25,17 +17,10 @@ const tabs = [
   { id: "billing", label: "Billing", icon: CreditCard },
 ] as const;
 
-const themeOptions = [
-  { id: "light", label: "Light", icon: Sun },
-  { id: "dark", label: "Dark", icon: Moon },
-  { id: "system", label: "System", icon: Monitor },
-] as const;
-
 export function SettingsModal() {
   const { isOpen, close } = useSettingsModalStore();
   const [activeId, setActiveId] =
     useState<(typeof tabs)[number]["id"]>("general");
-  const { theme, setTheme } = useTheme();
   const defaultModelId = useSettingsStore((s) => s.defaultModelId);
   const setDefaultModel = useSettingsStore((s) => s.setDefaultModel);
 
@@ -99,44 +84,7 @@ export function SettingsModal() {
                 <p className="mb-3 text-[13.5px] font-medium text-text">
                   Color Theme
                 </p>
-                <div className="grid grid-cols-3 gap-2.5">
-                  {themeOptions.map((opt) => {
-                    const Icon = opt.icon;
-                    const isSelected = theme === opt.id;
-                    return (
-                      <button
-                        key={opt.id}
-                        onClick={() => setTheme(opt.id)}
-                        className={clsx(
-                          "relative flex flex-col items-center gap-2 rounded-xl border p-4",
-                          isSelected
-                            ? "border-accent bg-accent-soft"
-                            : "border-border hover:border-border-strong",
-                        )}
-                      >
-                        {isSelected && (
-                          <span className="absolute right-2 top-2 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-white">
-                            <Check size={10} />
-                          </span>
-                        )}
-                        <Icon
-                          size={18}
-                          className={
-                            isSelected ? "text-accent" : "text-text-secondary"
-                          }
-                        />
-                        <span
-                          className={clsx(
-                            "text-[12.5px] font-medium",
-                            isSelected ? "text-accent" : "text-text",
-                          )}
-                        >
-                          {opt.label}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                <ThemeSelector />
               </div>
             </>
           )}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
+import { ToggleGroup } from "@/components/ui/ToggleGroup";
 import { videoModels } from "@/lib/data/video-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
 import { AttachmentButton } from "@/components/ui/AttachmentButton";
@@ -59,7 +59,7 @@ export default function VideoStudioPage() {
               attachments={attachments}
               onRemove={handleRemoveAttachment}
             />
-            <StudioToggleGroup
+            <ToggleGroup
               options={[...ASPECT_RATIOS]}
               value={aspectRatio}
               onChange={setAspectRatio}

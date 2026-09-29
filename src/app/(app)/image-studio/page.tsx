@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
+import { ToggleGroup } from "@/components/ui/ToggleGroup";
 import { imageModels } from "@/lib/data/image-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
 import { AttachmentButton } from "@/components/ui/AttachmentButton";
@@ -61,12 +61,12 @@ export default function ImageStudioPage() {
             onRemove={handleRemoveAttachment}
           />
 
-          <StudioToggleGroup
+          <ToggleGroup
             options={[...ASPECT_RATIOS]}
             value={aspectRatio}
             onChange={setAspectRatio}
           />
-          <StudioToggleGroup
+          <ToggleGroup
             options={[...COUNTS]}
             value={count}
             onChange={setCount}

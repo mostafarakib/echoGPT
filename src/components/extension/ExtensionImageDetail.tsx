@@ -1,0 +1,68 @@
+"use client";
+
+import { useState } from "react";
+import { ToggleGroup } from "@/components/ui/ToggleGroup";
+import { ModelSelectionDropdown } from "@/components/ui/ModelSelectionDropdown";
+import { AttachmentButton } from "@/components/ui/AttachmentButton";
+import {
+  AttachmentList,
+  type Attachment,
+} from "@/components/ui/AttachmentList";
+import { imageModels } from "@/lib/data/image-models";
+import { usePricingModalStore } from "@/store/usePricingModalStore";
+
+const ASPECT_RATIOS = ["1:1", "3:2", "2:3", "auto"] as const;
+
+export function ExtensionImageDetail() {
+  const [prompt, setPrompt] = useState("");
+  const [aspectRatio, setAspectRatio] =
+    useState<(typeof ASPECT_RATIOS)[number]>("1:1");
+  const [modelId, setModelId] = useState(imageModels[0].id);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const openPricing = usePricingModalStore((s) => s.open);
+
+  function handleFiles(files: File[]) {
+    setAttachments((prev) => [
+      ...prev,
+      ...files.map((file) => ({ id: crypto.randomUUID(), file })),
+    ]);
+  }
+
+  return (
+    <div>
+      <p className="mb-3 text-[15px] font-bold text-text">Image</p>
+      <textarea
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        rows={2}
+        placeholder="Describe the image you want"
+        className="w-full resize-none rounded-xl border border-border bg-surface px-3 py-2.5 text-[12.5px] text-text outline-none placeholder:text-text-muted"
+      />
+      <div className="mt-2.5 flex flex-wrap items-center gap-2">
+        <AttachmentButton onFilesSelected={handleFiles} accept="image/*" />
+        <ToggleGroup
+          options={[...ASPECT_RATIOS]}
+          value={aspectRatio}
+          onChange={setAspectRatio}
+        />
+      </div>
+      <AttachmentList
+        attachments={attachments}
+        onRemove={(id) => setAttachments((p) => p.filter((a) => a.id !== id))}
+      />
+      <div className="mt-3 flex items-center gap-2">
+        <ModelSelectionDropdown
+          models={imageModels}
+          selectedId={modelId}
+          onChange={setModelId}
+        />
+        <button
+          onClick={openPricing}
+          className="flex-1 rounded-xl bg-accent py-2.5 text-[12.5px] font-bold text-white hover:bg-accent-hover"
+        >
+          Generate
+        </button>
+      </div>
+    </div>
+  );
+}

@@ -2,7 +2,7 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { Plug, Crown, Mic, ArrowUp } from "lucide-react";
-import { ModelSelect } from "@/components/chat/ModalSelect";
+import { ModelSelect } from "@/components/chat/ModelSelect";
 import { useChatStore } from "@/store/useChatStore";
 import { useConnectorsModalStore } from "@/store/useConnectorsModalStore";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
