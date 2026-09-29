@@ -3,20 +3,17 @@
 import { useEffect, useState } from "react";
 import { X, FileVideo } from "lucide-react";
 
-export interface StudioAttachment {
+export interface Attachment {
   id: string;
   file: File;
 }
 
-interface StudioAttachmentListProps {
-  attachments: StudioAttachment[];
+interface AttachmentListProps {
+  attachments: Attachment[];
   onRemove: (id: string) => void;
 }
 
-export function StudioAttachmentList({
-  attachments,
-  onRemove,
-}: StudioAttachmentListProps) {
+export function AttachmentList({ attachments, onRemove }: AttachmentListProps) {
   if (attachments.length === 0) return null;
 
   return (
@@ -41,7 +38,7 @@ function AttachmentChip({
   attachment,
   onRemove,
 }: {
-  attachment: StudioAttachment;
+  attachment: Attachment;
   onRemove: (id: string) => void;
 }) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

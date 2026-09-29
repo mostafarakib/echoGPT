@@ -5,11 +5,11 @@ import { StudioToggleGroup } from "@/components/studio/StudioToggleGroup";
 import { StudioModelDropdown } from "@/components/studio/StudioModelDropdown";
 import { videoModels } from "@/lib/data/video-models";
 import { usePricingModalStore } from "@/store/usePricingModalStore";
-import { StudioAttachmentButton } from "@/components/studio/StudioAttachmentButton";
+import { AttachmentButton } from "@/components/ui/AttachmentButton";
 import {
-  StudioAttachmentList,
-  type StudioAttachment,
-} from "@/components/studio/StudioAttachmentList";
+  AttachmentList,
+  type Attachment,
+} from "@/components/ui/AttachmentList";
 
 const ASPECT_RATIOS = ["16:9", "9:16", "1:1"] as const;
 
@@ -19,7 +19,7 @@ export default function VideoStudioPage() {
     useState<(typeof ASPECT_RATIOS)[number]>("16:9");
   const [modelId, setModelId] = useState(videoModels[0].id);
   const openPricing = usePricingModalStore((s) => s.open);
-  const [attachments, setAttachments] = useState<StudioAttachment[]>([]);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
 
   function handleFilesSelected(files: File[]) {
     const newAttachments = files.map((file) => ({
@@ -51,11 +51,11 @@ export default function VideoStudioPage() {
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <StudioAttachmentButton
+            <AttachmentButton
               onFilesSelected={handleFilesSelected}
               accept="image/*,video/*"
             />
-            <StudioAttachmentList
+            <AttachmentList
               attachments={attachments}
               onRemove={handleRemoveAttachment}
             />

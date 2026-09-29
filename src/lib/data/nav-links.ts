@@ -39,6 +39,11 @@ export const engagementLinks: NavLink[] = [
   { id: "history", label: "History", icon: History, href: "/history" },
   { id: "store", label: "Store", icon: ShoppingBag, href: "/store" },
   { id: "ai-tasks", label: "AI Tasks", icon: ListChecks, href: "/ai-tasks" },
-  { id: "ai-job-analysis", label: "AI Job Analysis", icon: Briefcase },
+  {
+    id: "ai-job-analysis",
+    label: "AI Job Analysis",
+    icon: Briefcase,
+    href: "/ai-job-analysis",
+  },
   { id: "ai-sop-builder", label: "AI SOP Builder", icon: FileText },
 ];

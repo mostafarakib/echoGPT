@@ -8,7 +8,7 @@ interface StudioAttachmentButtonProps {
   accept: string;
 }
 
-export function StudioAttachmentButton({
+export function AttachmentButton({
   onFilesSelected,
   accept,
 }: StudioAttachmentButtonProps) {
