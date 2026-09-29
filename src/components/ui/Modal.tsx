@@ -22,13 +22,11 @@ export function Modal({
 }: ModalProps) {
   useEffect(() => {
     if (!isOpen) return;
-
     function handleKeydown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
     document.addEventListener("keydown", handleKeydown);
     document.body.style.overflow = "hidden";
-
     return () => {
       document.removeEventListener("keydown", handleKeydown);
       document.body.style.overflow = "";
@@ -37,14 +35,19 @@ export function Modal({
 
   if (!isOpen) return null;
 
+  function closeIfBackdropClick(e: React.MouseEvent<HTMLDivElement>) {
+    if (e.target === e.currentTarget) onClose();
+  }
+
   return createPortal(
     <div
       className="fixed inset-0 z-50 overflow-y-auto bg-black/50 px-4 py-[8vh]"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+      onClick={closeIfBackdropClick}
     >
-      <div className="mx-auto flex min-h-full items-start justify-center">
+      <div
+        className="mx-auto flex min-h-full items-start justify-center"
+        onClick={closeIfBackdropClick}
+      >
         <div
           className={clsx(
             "relative w-full rounded-xl border border-border bg-surface shadow-[0_12px_32px_rgba(20,20,30,0.12),0_2px_8px_rgba(20,20,30,0.06)]",

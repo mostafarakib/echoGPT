@@ -13,6 +13,7 @@ import { SidebarUpgradeCard } from "@/components/layout/SidebarUpgradeCard";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { EchoLogo } from "../ui/EchoLogo";
 
 export function Sidebar() {
   const { isMini, isMobileOpen, toggleMini, closeMobile } = useSidebarStore();
@@ -52,11 +53,12 @@ export function Sidebar() {
               : "justify-between",
           )}
         >
-          <div className="flex min-w-0 items-center gap-2.5 overflow-hidden">
+          <div
+            onClick={() => router.push("/")}
+            className="flex min-w-0 items-center gap-2.5 overflow-hidden"
+          >
             {(isMobileOpen || !isMini) && (
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">
-                E
-              </div>
+              <EchoLogo size={28} className="shrink-0 rounded-lg" />
             )}
             <span
               className={clsx(
@@ -82,7 +84,7 @@ export function Sidebar() {
             onClick={() => {
               newChat();
               closeMobile();
-              router.push("/");
+              router.push("/chat");
             }}
             className={clsx(
               "flex items-center gap-2.5 rounded-lg bg-accent px-2.5 py-2 text-[13.5px] font-semibold text-white hover:brightness-95",

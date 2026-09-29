@@ -27,7 +27,7 @@ export default function StorePage() {
   function handleTry(modelId: string) {
     newChat();
     setModel(modelId);
-    router.push("/");
+    router.push("/chat");
   }
 
   return (
