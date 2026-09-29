@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { LandingScreenshotCarousel } from "@/components/landing/LandingScreenshotCarousel";
 
